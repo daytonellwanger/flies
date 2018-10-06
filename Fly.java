@@ -3,21 +3,31 @@ import javax.swing.JDialog;
 public class Fly {
 	
 	private static final int DIALOG_SIZE = 400;
+	private static final int VELOCITY = 5;
+	private static final int SLEEP_TIME = 100;
+	
+	private JDialog dialog;
 
 	public static void main(String[] args) {
-		JDialog dialog = new JDialog();
+		new Fly();
+	}
+	
+	public Fly() {
+		dialog = new JDialog();
 		dialog.setSize(DIALOG_SIZE, DIALOG_SIZE);
 		dialog.setVisible(true);
 		run();
 	}
 	
-	private static void run() {
-		int i = 0;
+	private void run() {
+		int x = 0;
+		int y = 0;
 		while (true) {
-			System.out.println("Loop: " + i);
-			i++;
+			dialog.setLocation(x, y);
+			x += VELOCITY;
+			y += VELOCITY;
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(SLEEP_TIME);
 			} catch (Exception ex) {}
 		}
 	}
