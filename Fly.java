@@ -1,12 +1,15 @@
+import java.awt.Color;
+
 import javax.swing.JDialog;
 
 public class Fly {
 	
-	private static final int DIALOG_SIZE = 400;
-	private static final int VELOCITY = 50;
-	private static final int SLEEP_TIME = 100;
+	private static final int SIZE = 40;
+	private static final Color COLOR = Color.BLACK;
+	private static final int VELOCITY = 5;
+	private static final int SLEEP_TIME = 10;
 	
-	private JDialog dialog;
+	private JDialog fly;
 	
 	private int[] location;
 	private int direction = 1;
@@ -17,9 +20,12 @@ public class Fly {
 	
 	public Fly() {
 		location = new int[2];
-		dialog = new JDialog();
-		dialog.setSize(DIALOG_SIZE, DIALOG_SIZE);
-		dialog.setVisible(true);
+		fly = new JDialog();
+		fly.setSize(SIZE, SIZE);
+		fly.getContentPane().setBackground(COLOR);
+		fly.setUndecorated(true);
+		fly.setAlwaysOnTop(true);
+		fly.setVisible(true);
 		run();
 	}
 	
@@ -33,7 +39,7 @@ public class Fly {
 	
 	private void run() {
 		while (true) {
-			dialog.setLocation(location[0], location[1]);
+			fly.setLocation(location[0], location[1]);
 			move();
 			try {
 				Thread.sleep(SLEEP_TIME);
