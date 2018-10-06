@@ -8,6 +8,18 @@ public class Fly {
 		JDialog dialog = new JDialog();
 		dialog.setSize(DIALOG_SIZE, DIALOG_SIZE);
 		dialog.setVisible(true);
+		run();
+	}
+	
+	private static void run() {
+		int i = 0;
+		while (true) {
+			System.out.println("Loop: " + i);
+			i++;
+			try {
+				Thread.sleep(1000);
+			} catch (Exception ex) {}
+		}
 	}
 
 }
