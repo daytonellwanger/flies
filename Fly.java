@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JDialog;
 
@@ -11,6 +13,8 @@ public class Fly {
 	
 	private JDialog fly;
 	
+	private Dimension screenSize;
+	
 	private int[] location;
 	private int direction = 1;
 
@@ -19,6 +23,9 @@ public class Fly {
 	}
 	
 	public Fly() {
+		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		System.out.println(screenSize.getWidth());
+		System.out.println(screenSize.getHeight());
 		location = new int[2];
 		fly = new JDialog();
 		fly.setSize(SIZE, SIZE);
