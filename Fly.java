@@ -16,6 +16,7 @@ public class Fly {
 	private Dimension screenSize;
 	
 	private int[] location;
+	private double[] destination;
 	private int direction = 1;
 
 	public static void main(String[] args) {
@@ -24,9 +25,8 @@ public class Fly {
 	
 	public Fly() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		System.out.println(screenSize.getWidth());
-		System.out.println(screenSize.getHeight());
 		location = new int[2];
+		setNewDestination();
 		fly = new JDialog();
 		fly.setSize(SIZE, SIZE);
 		fly.getContentPane().setBackground(COLOR);
@@ -34,6 +34,18 @@ public class Fly {
 		fly.setAlwaysOnTop(true);
 		fly.setVisible(true);
 		run();
+	}
+	
+	private double[] getRandomPosition() {
+		return new double[] {
+				Math.random() * screenSize.getWidth(),
+				Math.random() * screenSize.getHeight()
+		};
+	}
+	
+	private void setNewDestination() {
+		destination = getRandomPosition();
+		System.out.println("Destination: " + destination[0] + ", " + destination[1]);
 	}
 	
 	private void move() {
