@@ -11,7 +11,7 @@ public class Fly {
 	private static final int VELOCITY = 5;
 	private static final int SLEEP_TIME = 10;
 	private static final double CLOSE_TOLERANCE = 10;
-	private static final double SUBDESTINATION_RADIUS = 30;
+	private static final double SUBDESTINATION_RADIUS = 75;
 	
 	private JDialog fly;
 	
@@ -76,15 +76,18 @@ public class Fly {
 	}
 	
 	private void move() {
-		double angleToDestination = getAngleToPoint(destination);
-		location[0] += VELOCITY * Math.cos(angleToDestination);
-		location[1] -= VELOCITY * Math.sin(angleToDestination);
+		double angleToSubdestination = getAngleToPoint(subdestination);
+		location[0] += VELOCITY * Math.cos(angleToSubdestination);
+		location[1] -= VELOCITY * Math.sin(angleToSubdestination);
 		checkReachedDestination();
 	}
 	
 	private void checkReachedDestination() {
-		if (getDistanceToPoint(destination) < CLOSE_TOLERANCE) {
-			setNewDestination();
+		if (getDistanceToPoint(subdestination) < CLOSE_TOLERANCE) {
+			if (subdestination == destination) {
+				setNewDestination();
+			}
+			setNewSubdestination();
 		}
 	}
 	
