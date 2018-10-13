@@ -11,6 +11,7 @@ public class Fly {
 	private static final int VELOCITY = 5;
 	private static final int SLEEP_TIME = 10;
 	private static final double CLOSE_TOLERANCE = 10;
+	private static final double SUBDESTINATION_RADIUS = 30;
 	
 	private JDialog fly;
 	
@@ -18,6 +19,7 @@ public class Fly {
 	
 	private double[] location;
 	private double[] destination;
+	private double[] subdestination;
 
 	public static void main(String[] args) {
 		new Fly();
@@ -27,6 +29,8 @@ public class Fly {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		location = new double[2];
 		setNewDestination();
+		subdestination = new double[2];
+		setNewSubdestination();
 		fly = new JDialog();
 		fly.setSize(SIZE, SIZE);
 		fly.getContentPane().setBackground(COLOR);
@@ -46,6 +50,21 @@ public class Fly {
 	private void setNewDestination() {
 		destination = getRandomPosition();
 		System.out.println("Destination: " + destination[0] + ", " + destination[1]);
+	}
+	
+	private void setNewSubdestination() {
+		if (getDistanceToPoint(destination) < 2 * SUBDESTINATION_RADIUS) {
+			subdestination = destination;
+		} else {
+			double angleToDestination = getAngleToPoint(destination);
+			double[] circle = {location[0], location[1]};
+			circle[0] += SUBDESTINATION_RADIUS * Math.cos(angleToDestination);
+			circle[1] -= SUBDESTINATION_RADIUS * Math.sin(angleToDestination);
+			double randomRadius = Math.random() * SUBDESTINATION_RADIUS;
+			double randomAngle = Math.random() * 2 * Math.PI;
+			subdestination[0] = circle[0] + randomRadius * Math.cos(randomAngle);
+			subdestination[1] = circle[1] + randomRadius * Math.sin(randomAngle);
+		}
 	}
 	
 	private double getAngleToPoint(double[] point) {
