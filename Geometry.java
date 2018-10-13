@@ -7,4 +7,10 @@ public class Geometry {
 		return Math.atan2(dY, dX);
 	}
 	
+	public static double getDistance(double[] from, double[] to) {
+		double dX = to[0] - from[0];
+		double dY = -(to[1] - from[1]);
+		return Math.hypot(dX, dY);
+	}
+	
 }

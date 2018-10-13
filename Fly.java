@@ -10,6 +10,7 @@ public class Fly {
 	private static final Color COLOR = Color.BLACK;
 	private static final int VELOCITY = 5;
 	private static final int SLEEP_TIME = 10;
+	private static final double CLOSE_TOLERANCE = 10;
 	
 	private JDialog fly;
 	
@@ -51,10 +52,21 @@ public class Fly {
 		return Geometry.getAngle(location, point);
 	}
 	
+	private double getDistanceToPoint(double[] point) {
+		return Geometry.getDistance(location, point);
+	}
+	
 	private void move() {
 		double angleToDestination = getAngleToPoint(destination);
 		location[0] += VELOCITY * Math.cos(angleToDestination);
 		location[1] -= VELOCITY * Math.sin(angleToDestination);
+		checkReachedDestination();
+	}
+	
+	private void checkReachedDestination() {
+		if (getDistanceToPoint(destination) < CLOSE_TOLERANCE) {
+			setNewDestination();
+		}
 	}
 	
 	private void run() {
