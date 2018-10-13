@@ -15,9 +15,8 @@ public class Fly {
 	
 	private Dimension screenSize;
 	
-	private int[] location;
+	private double[] location;
 	private double[] destination;
-	private int direction = 1;
 
 	public static void main(String[] args) {
 		new Fly();
@@ -25,7 +24,7 @@ public class Fly {
 	
 	public Fly() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		location = new int[2];
+		location = new double[2];
 		setNewDestination();
 		fly = new JDialog();
 		fly.setSize(SIZE, SIZE);
@@ -48,17 +47,19 @@ public class Fly {
 		System.out.println("Destination: " + destination[0] + ", " + destination[1]);
 	}
 	
+	private double getAngleToPoint(double[] point) {
+		return Geometry.getAngle(location, point);
+	}
+	
 	private void move() {
-		location[0] += direction * VELOCITY;
-		location[1] += direction * VELOCITY;
-		if (location[0] > 1000 || location[0] < 0) {
-			direction *= -1;
-		}
+		double angleToDestination = getAngleToPoint(destination);
+		location[0] += VELOCITY * Math.cos(angleToDestination);
+		location[1] -= VELOCITY * Math.sin(angleToDestination);
 	}
 	
 	private void run() {
 		while (true) {
-			fly.setLocation(location[0], location[1]);
+			fly.setLocation((int) Math.round(location[0]), (int) Math.round(location[1]));
 			move();
 			try {
 				Thread.sleep(SLEEP_TIME);
