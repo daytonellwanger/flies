@@ -33,7 +33,7 @@ public class Fly {
 		fly.setUndecorated(true);
 		fly.setAlwaysOnTop(true);
 		fly.setVisible(true);
-		run();
+		(new Thread(new FlyThread())).start();
 	}
 	
 	private double[] getRandomPosition() {
@@ -87,14 +87,18 @@ public class Fly {
 		}
 	}
 	
-	private void run() {
-		while (true) {
-			fly.setLocation((int) Math.round(location[0]), (int) Math.round(location[1]));
-			move();
-			try {
-				Thread.sleep(SLEEP_TIME);
-			} catch (Exception ex) {}
+	class FlyThread implements Runnable {
+		
+		public void run() {
+			while (true) {
+				fly.setLocation((int) Math.round(location[0]), (int) Math.round(location[1]));
+				move();
+				try {
+					Thread.sleep(SLEEP_TIME);
+				} catch (Exception ex) {}
+			}
 		}
+		
 	}
 
 }
