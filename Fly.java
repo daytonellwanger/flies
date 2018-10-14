@@ -20,10 +20,6 @@ public class Fly {
 	private double[] location;
 	private double[] destination;
 	private double[] subdestination;
-
-	public static void main(String[] args) {
-		new Fly();
-	}
 	
 	public Fly() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
