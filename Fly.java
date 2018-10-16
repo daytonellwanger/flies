@@ -23,7 +23,7 @@ public class Fly {
 	
 	public Fly() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		location = new double[2];
+		location = getRandomPosition();
 		setNewDestination();
 		subdestination = new double[2];
 		setNewSubdestination();
@@ -45,7 +45,6 @@ public class Fly {
 	
 	private void setNewDestination() {
 		destination = getRandomPosition();
-		System.out.println("Destination: " + destination[0] + ", " + destination[1]);
 	}
 	
 	private void setNewSubdestination() {
